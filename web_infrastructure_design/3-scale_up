@@ -1,0 +1,26 @@
+3. Scale Up 
+
+Now we scale up by separating responsibilities and improving redundancy.
+
+- The user types www.foobar.com
+, DNS points to the IP of a load balancer cluster.
+
+- Instead of one, there are now two load balancers working in a cluster. If one fails, the other automatically takes over, avoiding SPOF at the load balancing level.
+
+- The load balancers send traffic to a pool of web servers:
+    These servers only run Nginx and handle static content (HTML, CSS, images).
+    Dynamic requests are forwarded to a separate set of application servers.
+
+- The application servers only run the business logic and process requests from the web servers.
+
+- The databases are also separated:
+    One MySQL Master accepts all write operations.
+    One or several MySQL Replicas (Slaves) replicate the Master and handle read requests.
+
+## Advantages:
+
+- Separation of concerns: Each server has a single role (web, application, or database).
+
+- Independent scalability: If more traffic arrives, we can add more web servers; if the application logic is heavy, we can add more app servers; if there are many read queries, we can add more replicas.
+
+- Resilience: With two load balancers in a cluster, there is no SPOF at the load balancing level.
