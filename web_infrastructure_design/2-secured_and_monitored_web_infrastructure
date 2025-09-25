@@ -1,0 +1,38 @@
+2 . Secured and monitored 
+
+- Now let’s secure and monitor the system.
+
+- The user types www.foobar.com
+, the DNS points to the IP of the load balancer.
+
+- Before reaching the load balancer, the traffic goes through a firewall, filtering unauthorized connections (e.g., only allowing ports 80 and 443).
+
+- The load balancer (HAProxy) is configured with an SSL certificate, so traffic between the user and the site is encrypted using HTTPS.
+
+- The load balancer distributes the traffic across the two backend servers.
+
+- Each backend server has:
+
+- A local firewall that blocks unauthorized traffic.
+
+- Nginx (web server).
+
+- Application server and the application code.
+
+- MySQL database (Master on Server 1, Replica on Server 2).
+
+- A monitoring agent that collects performance data (e.g., CPU usage, memory, request errors, response time).
+
+## Monitoring:
+
+- Agents send metrics to a centralized monitoring system (e.g., Datadog, Sumologic, Prometheus).
+
+- for example, to monitor QPS (Queries Per Second), the agent collects the number of requests processed per second by Nginx and reports it to the monitoring dashboard.
+
+## Issues:
+
+- SSL termination at the load balancer: After the load balancer, traffic to backend servers is unencrypted, which can be a security risk.
+
+- Single Master database: Only one MySQL server accepts writes, which limits scalability.
+
+- All-in-one servers: Each server runs web, application, and database layers, which complicates scaling and maintenance.
