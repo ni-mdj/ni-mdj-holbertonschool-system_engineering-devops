@@ -1,1 +1,26 @@
 https://lucid.app/lucidchart/58512d29-835c-4b36-9359-532f84c87ae3/edit?viewport_loc=-1212%2C-395%2C3553%2C1702%2C0_0&invitationId=inv_d6c58a33-97f1-4222-bd6e-361fcfe2b2b1
+
+
+## Explanation : 
+
+- Load Balancer (HAProxy): Distributes incoming traffic to multiple servers. Prevents overload.
+
+- Algorithm: Commonly Round Robin → cycles requests between servers.
+
+- Active-Active: Both servers work simultaneously to handle traffic.
+
+- Active-Passive: One server works, the other is on standby.
+
+- Database Master-Replica setup:
+
+- Primary (Master): Handles all writes.
+
+- Replica (Slave): Copies data from Master, used for read operations.
+
+## Issues : 
+
+- SPOF: The load balancer itself can fail.
+
+- Security: No HTTPS or firewalls → vulnerable to attacks.
+
+- Monitoring: No system to detect failures.
